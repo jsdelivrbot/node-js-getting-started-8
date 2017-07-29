@@ -1,14 +1,12 @@
 'use strict'
 
-const LocalStorage = require('node-localstorage').LocalStorage;
 const Telegram = require('telegram-node-bot');
-const TelegramBaseController = Telegram.TelegramBaseController;
 const TextCommand = Telegram.TextCommand;
 const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
   workers: 1
 });
 
-class PingController extends TelegramBaseController {
+class PingController extends Telegram.TelegramBaseController {
 
   /**
    * @param {Scope} $
