@@ -2,7 +2,11 @@
 
 const Telegram = require('telegram-node-bot');
 const TextCommand = Telegram.TextCommand;
-const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ');
+const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
+    webAdmin: {
+        port: process.env.PORT || 5000
+    }
+});
 
 class PingController extends Telegram.TelegramBaseController {
 
