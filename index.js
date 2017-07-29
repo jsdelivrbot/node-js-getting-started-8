@@ -2,9 +2,7 @@
 
 const Telegram = require('telegram-node-bot');
 const TextCommand = Telegram.TextCommand;
-const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
-  workers: 1
-});
+const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ');
 
 class PingController extends Telegram.TelegramBaseController {
 
