@@ -5,7 +5,7 @@
 
 
 const TOKEN = process.env.TELEGRAM_TOKEN || '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
-const TelegramBot = require('..');
+const TelegramBot = require('node-telegram-bot-api');
 const options = {
   webHook: {
     // Port to which you should bind is assigned to $PORT variable
@@ -20,7 +20,7 @@ const options = {
 // Add URL of your app to env variable or enable Dyno Metadata
 // to get this automatically
 // See: https://devcenter.heroku.com/articles/dyno-metadata
-const url = process.env.APP_URL || 'https://<app-name>.herokuapp.com:443';
+const url = process.env.APP_URL || 'https://evening-headland-56271.herokuapp.com/';
 const bot = new TelegramBot(TOKEN, options);
 
 
