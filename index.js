@@ -6,8 +6,7 @@ const TextCommand = Telegram.TextCommand;
 const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
   webhook: {
     url: 'https://evening-headland-56271.herokuapp.com/',
-    port: process.env.PORT || 5000,
-    host: 'localhost'
+    port: process.env.PORT || 5000
   }
 });
 
