@@ -2,15 +2,11 @@
 
 const Telegram = require('telegram-node-bot');
 const TextCommand = Telegram.TextCommand;
-
 const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
-  webhook: {
-    url: 'https://evening-headland-56271.herokuapp.com/',
-    port: process.env.PORT || 5000,
-    host: 'localhost'
-  }
+    webAdmin: {
+        port: process.env.PORT || 5000
+    }
 });
-
 
 class PingController extends Telegram.TelegramBaseController {
 
@@ -27,7 +23,7 @@ class PingController extends Telegram.TelegramBaseController {
 
   n1Handler($) {
     console.log('/n1: ' + $.message.text);
-    $.setUserSession('n1', this.getNumericValueFromCommand($.message.text));
+    $.setUserSession('n1', this.getNumericValueFromCommand($.message.text));    
     $.sendMessage('Muy bien, ahora ingresa el numero 2');
   }
 
