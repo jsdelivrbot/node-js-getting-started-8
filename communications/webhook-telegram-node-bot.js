@@ -1,63 +1,35 @@
-'use strict'
+/**
+ * This example demonstrates setting up webhook
+ * on the Heroku platform.
+ */
 
-const Telegram = require('telegram-node-bot');
-const TextCommand = Telegram.TextCommand;
 
-const tg = new Telegram.Telegram('447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ', {
-  webhook: {
-    url: 'https://evening-headland-56271.herokuapp.com/node-bot-webhook',
+const TOKEN = process.env.TELEGRAM_TOKEN || '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
+const TelegramBot = require('..');
+const options = {
+  webHook: {
+    // Port to which you should bind is assigned to $PORT variable
+    // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
     port: process.env.PORT || 5000
+    // you do NOT need to set up certificates since Heroku provides
+    // the SSL certs already (https://<app-name>.herokuapp.com)
+    // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
   }
+};
+// Heroku routes from port :443 to $PORT
+// Add URL of your app to env variable or enable Dyno Metadata
+// to get this automatically
+// See: https://devcenter.heroku.com/articles/dyno-metadata
+const url = process.env.APP_URL || 'https://<app-name>.herokuapp.com:443';
+const bot = new TelegramBot(TOKEN, options);
+
+
+// This informs the Telegram servers of the new webhook.
+// Note: we do not need to pass in the cert, as it already provided
+bot.setWebHook(`${url}/bot${TOKEN}`);
+
+
+// Just to ping!
+bot.on('message', function onMessage(msg) {
+  bot.sendMessage(msg.chat.id, 'I am alive on Heroku!');
 });
-
-class LabController extends Telegram.TelegramBaseController {
-
-  /**
-   * @param {Scope} $
-   */
-  n1Handler($) {
-    $.setUserSession('n1', this.getNumericValueFromCommand($.message.text));
-    $.sendMessage('Muy bien, ahora ingresa el numero 2 con /n2');
-  }
-
-  n2Handler($) {
-    $.setUserSession('n2', this.getNumericValueFromCommand($.message.text));
-    $.sendMessage('Muy bien, ahora ingresa el comando /result');
-  }
-
-  resultHandler($) {
-    $.getUserSession('n1').then(n1 => {
-      $.getUserSession('n2').then(n2 => {
-        const result = parseInt(n1) + parseInt(n2);
-        $.sendMessage("La suma es: " + result);
-      });
-    });
-  }
-
-  get routes() {
-    return {
-      'pingCommand': 'pingHandler',
-      'n1Command': 'n1Handler',
-      'n2Command': 'n2Handler',
-      'resultCommand': 'resultHandler'
-    }
-  }
-
-  getNumericValueFromCommand(comandValue) {
-    return comandValue.split(' ').slice(1).join(' ')
-  }
-
-}
-
-class OtherwiseController extends Telegram.TelegramBaseController {
-  handle($) {
-    $.sendMessage('Ingresa alguna de las siguientes opciones: /n1, /n2, /result');
-  }
-}
-
-tg.router
-  .when(new TextCommand('/ping', 'pingCommand'), new LabController())
-  .when(new TextCommand('/n1', 'n1Command'), new LabController())
-  .when(new TextCommand('/n2', 'n2Command'), new LabController())
-  .when(new TextCommand('/result', 'resultCommand'), new LabController())
-  .otherwise(new OtherwiseController());
