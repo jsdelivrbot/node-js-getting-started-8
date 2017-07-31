@@ -94,7 +94,7 @@ bot.on('inline_query', (msg) => {
       { //https://core.telegram.org/bots/api#inlinequeryresultarticle
         id: '1',
         type: 'article',
-        title: 'Opción 1.',
+        title: 'Opción 1..',
         input_message_content: {
           message_text: 'contenido de opción 1'
         }
@@ -102,7 +102,7 @@ bot.on('inline_query', (msg) => {
       {
         id: '2',
         type: 'article',
-        title: 'Opción 2.',
+        title: 'Opción 2..',
         message_text: 'tow text',
         input_message_content: {
           message_text: 'contenido de opción 2'
