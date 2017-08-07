@@ -1,41 +1,20 @@
 "use strict";
-/*
-const TOKEN = process.env.TELEGRAM_TOKEN || '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
-const TelegramBot = require('node-telegram-bot-api');
-const options = {
-  webHook: {
-    // Port to which you should bind is assigned to $PORT variable
-    // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
-    port: process.env.PORT || 5000
-    // you do NOT need to set up certificates since Heroku provides
-    // the SSL certs already (https://<app-name>.herokuapp.com)
-    // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
-  }
-};
-// Heroku routes from port :443 to $PORT
-// Add URL of your app to env variable or enable Dyno Metadata
-// to get this automatically
-// See: https://devcenter.heroku.com/articles/dyno-metadata
-const url = process.env.APP_URL || 'https://evening-headland-56271.herokuapp.com/';
-const bot = new TelegramBot(TOKEN, options);
-
-
-// This informs the Telegram servers of the new webhook.
-// Note: we do not need to pass in the cert, as it already provided
-bot.setWebHook(`${url}/bot${TOKEN}`);
-*/
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("guelcom");
-var y = 1;
-var x = 2;
-var z = y + x;
-console.log(z);
-var i = 9;
 var TelegramBot = require("node-telegram-bot-api");
 // replace the value below with the Telegram token you receive from @BotFather
 var token = '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
 // Create a bot that uses 'polling' to fetch new updates
-var bot = new TelegramBot(token, { polling: true });
+var prodOptions = {
+    webHook: {
+        port: process.env.PORT || 5000
+    }
+};
+var devOptions = {
+    polling: true
+};
+var bot = new TelegramBot(token, prodOptions);
+var url = 'https://evening-headland-56271.herokuapp.com/dist/index.js';
+bot.setWebHook(url + "/bot" + token);
 var inlineOptions = {
     inlineQueries: {
         GetPictures: 'CM_GETQUERIES'
@@ -78,7 +57,6 @@ bot.onText(/^\/menu$/, function (msg, match) {
  * List for every entered message
  */
 bot.on('message', function (msg) {
-    console.log("jola pues mijito pues");
     var chatId = msg.chat.id;
     console.log('message received 987');
     console.log(JSON.stringify(msg));
