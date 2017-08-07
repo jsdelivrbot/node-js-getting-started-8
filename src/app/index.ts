@@ -18,17 +18,17 @@ export namespace ReplyMarkups {
 
     export namespace Index {
 
-        export const Estudiante: KeyboardButton = {
+        export const EstudianteBtn: KeyboardButton = {
             text: 'Estudiante'
         };
 
-        export const Profesor: KeyboardButton = {
+        export const ProfesorBtn: KeyboardButton = {
             text: 'Profesor'
         };
 
         export const keyboard: Array<Array<KeyboardButton>> = [
-            [Estudiante],
-            [Profesor]
+            [EstudianteBtn],
+            [ProfesorBtn]
         ];
 
         export const start_markup = {
@@ -69,9 +69,9 @@ bot.on('message', (msg: Message) => {
         return;
     }
 
-    if (msg.text.indexOf(ReplyMarkups.Index.Estudiante.text) === 0) {
+    if (msg.text.indexOf(ReplyMarkups.Index.EstudianteBtn.text) === 0) {
         StudentMessages.StudentRegistration.sendStudentMessage(msg)
-    } if (msg.text.indexOf(ReplyMarkups.Index.Profesor.text) === 0) {
+    } if (msg.text.indexOf(ReplyMarkups.Index.ProfesorBtn.text) === 0) {
         console.log("Profesor profile")
     }
 });
