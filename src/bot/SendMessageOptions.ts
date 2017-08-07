@@ -1,7 +1,8 @@
 import { InlineKeyboardMarkup } from "./InlineKeyboardMarkup";
 import { ReplyKeyboardMarkup } from "./ReplyKeyboardMarkup";
+import { ReplyKeyboardRemove } from "./ReplyKeyboardRemove";
 
 export interface SendMessageOptions {
-    reply_markup: ReplyKeyboardMarkup | InlineKeyboardMarkup;
-    parse_mode:string;
+    parse_mode: string;
+    reply_markup: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove;
 }

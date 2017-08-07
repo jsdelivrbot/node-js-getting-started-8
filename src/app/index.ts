@@ -9,18 +9,18 @@ import { Message } from "../bot/Message";
 import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
 import { SendMessageOptions } from "../bot/SendMessageOptions";
 import { Chat } from "../bot/Chat";
-import {Chat as ChatModel} from '../core/contracts';
+import { Chat as ChatModel } from '../core/contracts';
 
 namespace reply_markups {
 
     export namespace index {
 
-        export const keyBoardOptions = {
+        const keyBoardOptions = {
             Estudiante: 'Estudiante',
             Profesor: 'Profesor',
         };
 
-        const reply_markup = {
+        export const reply_markup = {
             resize_keyboard: true,
             one_time_keyboard: true,
             keyboard: [
@@ -32,15 +32,16 @@ namespace reply_markups {
 
 bot.onText(/^\/start$/, (msg: Message, match: any) => {
 
-    console.log("start 2");
-
     let messageOptions = {
-        parse_mode: 'HTML'
+        parse_mode: 'HTML',
+        reply_markup: reply_markups.index.reply_markup
     } as SendMessageOptions;
 
-    let chat:ChatModel|null = Data.Chats.getById('ad');
+    let chat: ChatModel | null = Data.Chats.getById('ad');
 
-    bot.sendMessage(msg.chat.id,
-        `Hola <b>${msg.from.first_name}</b>, ingresa el comando '/menu'`,
-        messageOptions);
+    bot.sendMessage(
+        msg.chat.id,
+        `Hola <b>${msg.from.first_name}</b>, escoje tu categoria`,
+        messageOptions
+    );
 });
