@@ -2,7 +2,7 @@ import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
 
 namespace reply_markups {
 
-    export namespace StudentRegistration {
+    export namespace AtendeeRegistration {
 
         const keyBoardOptions = {
             Estudiante: 'Estudiante',
