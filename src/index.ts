@@ -1,4 +1,7 @@
 require('./initBot');
-require('./app/index');
 
-console.log('test 3');
+require('./app/index');
+require('./app/student-registration');
+require('./app/atendee-registration');
+
+require('./jobs/notify-grades-job');
