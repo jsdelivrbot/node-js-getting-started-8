@@ -12,7 +12,7 @@ var prodOptions = {
 var devOptions = {
     polling: true
 };
-var bot = new TelegramBot(token, prodOptions);
+var bot = new TelegramBot(token, devOptions);
 var url = 'https://evening-headland-56271.herokuapp.com/dist/index.js';
 bot.setWebHook(url + "/bot" + token);
 var inlineOptions = {

@@ -14,7 +14,11 @@ const devOptions = {
   polling: true 
 };
 
-const bot = new TelegramBot(token, prodOptions);
+export const firebase = require('firebase');
+//initialize firebase
+export const dataBase = null;
+
+export const bot = new TelegramBot(token, devOptions);
 
 const url = 'https://evening-headland-56271.herokuapp.com/dist/index.js';
 

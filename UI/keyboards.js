@@ -31,7 +31,7 @@ bot.onText(/^\/menu$/, (msg, match) => {
   const chatId = msg.chat.id;
   const resp = match[1];
 
-  let messageOptions = {    
+  let messageOptions = {    //https://core.telegram.org/bots/api#message
     reply_markup: {
       resize_keyboard: true,
       one_time_keyboard: true,
