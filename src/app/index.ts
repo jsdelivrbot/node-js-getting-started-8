@@ -15,7 +15,7 @@ import { studentRegistration } from './student-registration';
 
 export namespace index {
 
-    namespace reply_markups {
+    export namespace reply_markups {
 
         export const EstudianteBtn: KeyboardButton = {
             text: 'Estudiante'

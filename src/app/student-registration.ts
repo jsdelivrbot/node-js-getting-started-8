@@ -13,7 +13,7 @@ import * as Data from '../data';
 
 export namespace studentRegistration {
 
-    namespace reply_markups {
+    export namespace reply_markups {
 
         export const misDatosBtn: KeyboardButton = {
             text: 'Mis datos'
