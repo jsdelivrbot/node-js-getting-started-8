@@ -5,7 +5,8 @@ export interface Configuration {
 
 export interface University {
     id: string;
-    name: string;
+    nombre: string;
+    coursesList: Array<Course>;
 }
 
 export interface Course {

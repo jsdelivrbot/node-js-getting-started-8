@@ -8,6 +8,7 @@ import { InlineKeyboardMarkup } from "../bot/InlineKeyboardMarkup";
 import { InlineKeyboardButton } from "../bot/InlineKeyboardButton";
 
 import * as Core from '../core';
+import { University } from "../core/contracts";
 
 export namespace attendee_registration {
 
@@ -19,11 +20,10 @@ export namespace attendee_registration {
 
         export const sendAttendeeMessage = (msg: Message) => {
 
-            Data.Universities.getAllUniversities().then((response: any) => {
+            Data.Universities.getAllUniversities().then((universitiesList: Array<University>) => {
 
-                console.log(JSON.stringify(response));
-
-                if(!response){
+                if (!universitiesList ||
+                    universitiesList.length == 0) {
                     return;
                 }
 
