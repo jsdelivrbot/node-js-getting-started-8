@@ -12,11 +12,11 @@ import { Chat } from "../bot/Chat";
 import { Chat as ChatModel } from '../core/contracts';
 import { KeyboardButton } from "../bot/KeyboardButton";
 
-import { Messages as StudentMessages } from './student-registration';
+import { studentRegistration } from './student-registration';
 
-export namespace ReplyMarkups {
+export namespace index {
 
-    export namespace Index {
+    namespace reply_markups {
 
         export const EstudianteBtn: KeyboardButton = {
             text: 'Estudiante'
@@ -26,7 +26,7 @@ export namespace ReplyMarkups {
             text: 'Profesor'
         };
 
-        export const keyboard: Array<Array<KeyboardButton>> = [
+        const keyboard: Array<Array<KeyboardButton>> = [
             [EstudianteBtn],
             [ProfesorBtn]
         ];
@@ -37,15 +37,12 @@ export namespace ReplyMarkups {
             keyboard: keyboard,
         } as ReplyKeyboardMarkup;
     }
-}
 
-export namespace Messages {
-
-    export namespace Index {
+    export namespace messages {
 
         const messageOptions = {
             parse_mode: 'HTML',
-            reply_markup: ReplyMarkups.Index.start_markup
+            reply_markup: reply_markups.start_markup
         } as SendMessageOptions;
 
         export const sendStartMessage = (msg: Message) => {
@@ -56,22 +53,29 @@ export namespace Messages {
             );
         };
     }
+
+    export namespace eventHandlers {
+
+        export const listen = () => {
+            bot.onText(/^\/start$/, (msg: Message, match: any) => {
+                let chat: ChatModel | null = Data.Chats.getById('ad');
+                index.messages.sendStartMessage(msg);
+            });
+
+            bot.on('message', (msg: Message) => {
+
+                if (!msg.text) {
+                    return;
+                }
+
+                if (msg.text.indexOf(reply_markups.EstudianteBtn.text) === 0) {
+                    studentRegistration.messages.sendStudentMessage(msg);
+                } if (msg.text.indexOf(reply_markups.ProfesorBtn.text) === 0) {
+                    console.log("Profesor profile")
+                }
+            });
+        }
+    }
 }
 
-bot.onText(/^\/start$/, (msg: Message, match: any) => {
-    let chat: ChatModel | null = Data.Chats.getById('ad');
-    Messages.Index.sendStartMessage(msg);
-});
-
-bot.on('message', (msg: Message) => {
-
-    if (!msg.text) {
-        return;
-    }
-
-    if (msg.text.indexOf(ReplyMarkups.Index.EstudianteBtn.text) === 0) {
-        StudentMessages.StudentRegistration.sendStudentMessage(msg)
-    } if (msg.text.indexOf(ReplyMarkups.Index.ProfesorBtn.text) === 0) {
-        console.log("Profesor profile")
-    }
-});
+index.eventHandlers.listen();

@@ -10,28 +10,30 @@ import { SendMessageOptions } from "../bot/SendMessageOptions";
 import { KeyboardButton } from "../bot/KeyboardButton";
 import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
 
+import { index } from './index';
+
 import * as Data from '../data';
 
-export namespace ReplyMarkups {
+export namespace studentRegistration {
 
-    export namespace StudentRegistration {
+    namespace reply_markups {
 
-        export const MisDatos: KeyboardButton = {
+        export const misDatosBtn: KeyboardButton = {
             text: 'Mis datos'
         };
 
-        export const Asistencia: KeyboardButton = {
+        export const asistenciaBtn: KeyboardButton = {
             text: 'Registrar asistencia'
         };
 
-        export const Volver: KeyboardButton = {
+        export const volverBtn: KeyboardButton = {
             text: 'Volver'
         };
 
         const keyboard: Array<Array<KeyboardButton>> = [
-            [MisDatos],
-            [Asistencia],
-            [Volver]
+            [misDatosBtn],
+            [asistenciaBtn],
+            [volverBtn]
         ];
 
         export const student_markups = {
@@ -40,15 +42,12 @@ export namespace ReplyMarkups {
             keyboard: keyboard,
         } as ReplyKeyboardMarkup;
     }
-}
 
-export namespace Messages {
-
-    export namespace StudentRegistration {
+    export namespace messages {
 
         const messageOptions = {
             parse_mode: 'HTML',
-            reply_markup: ReplyMarkups.StudentRegistration.student_markups
+            reply_markup: reply_markups.student_markups
         } as SendMessageOptions;
 
         export const sendStudentMessage = (msg: Message) => {
@@ -59,4 +58,27 @@ export namespace Messages {
             );
         };
     }
+
+    export namespace eventHandlers {
+        
+        export const listen = () => {
+
+            bot.on('message', (msg: Message) => {
+
+                if (!msg.text) {
+                    return;
+                }
+
+                if (msg.text.indexOf(reply_markups.misDatosBtn.text) === 0) {
+                    console.log("mis datos btn")
+                } else if (msg.text.indexOf(reply_markups.asistenciaBtn.text) === 0) {
+                    console.log("asistencia btn")
+                } if (msg.text.indexOf(reply_markups.volverBtn.text) === 0) {
+                    index.messages.sendStartMessage(msg);
+                }
+            });
+        }
+    }
 }
+
+studentRegistration.eventHandlers.listen();
