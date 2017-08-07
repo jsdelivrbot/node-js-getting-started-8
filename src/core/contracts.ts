@@ -22,3 +22,7 @@ export interface Student {
 export interface Attendance {
 
 }
+
+export interface Chat {
+    id:string;
+}

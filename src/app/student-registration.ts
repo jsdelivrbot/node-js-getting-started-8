@@ -1,6 +1,4 @@
-import {
-    ReplyKeyboardMarkup
-} from '../bot/contracts';
+import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
 
 namespace reply_markups {
 
