@@ -5,8 +5,8 @@
     "target": "es5",
     "module": "commonjs",
     "strict": true,
-    "sourceMap": false,
-    "watch": true
+    "sourceMap": false
+    //"watch": true
   },
   "exclude": [
     "node_modules"
