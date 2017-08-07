@@ -8,6 +8,7 @@ import { KeyboardButton } from "../bot/KeyboardButton";
 import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
 
 import { index } from './index';
+import { attendee_registration } from './attendee-registration';
 
 import * as Data from '../data';
 
@@ -69,7 +70,7 @@ export namespace studentRegistration {
                 if (msg.text.indexOf(reply_markups.misDatosBtn.text) === 0) {
                     console.log("mis datos btn")
                 } else if (msg.text.indexOf(reply_markups.asistenciaBtn.text) === 0) {
-                    console.log("asistencia btn")
+                    attendee_registration.messages.sendAttendeeMessage(msg);
                 } if (msg.text.indexOf(reply_markups.volverBtn.text) === 0) {
                     index.messages.sendStartMessage(msg);
                 }
