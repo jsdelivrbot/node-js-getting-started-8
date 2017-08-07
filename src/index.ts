@@ -1,4 +1,3 @@
-'use strict';
 /*
 const TOKEN = process.env.TELEGRAM_TOKEN || '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
 const TelegramBot = require('node-telegram-bot-api');
@@ -25,7 +24,19 @@ const bot = new TelegramBot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
 */
 
-const TelegramBot = require('node-telegram-bot-api');
+console.log("guelcom");
+
+let y = 1;
+let x = 2;
+const z = y + x;
+console.log(z);
+
+
+let i = 9;
+
+
+
+import TelegramBot = require('node-telegram-bot-api');
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '447133612:AAG96SqODQfDB9sXv9YB9GLdWEg15BxekPQ';
@@ -39,7 +50,7 @@ const inlineOptions = {
   }
 };
 
-bot.onText(/^\/start$/, (msg, match) => {
+bot.onText(/^\/start$/, (msg, match) => {  
 
   let messageOptions = {
     parse_mode: 'HTML'
@@ -83,11 +94,13 @@ bot.onText(/^\/menu$/, (msg, match) => {
 /**
  * List for every entered message
  */
-bot.on('message', (msg) => {
+bot.on('message', (msg) => {  
+  
+  console.log("jola pues mijito pues");
 
   const chatId = msg.chat.id;
 
-  console.log('message received');
+  console.log('message received 987');
 
   console.log(JSON.stringify(msg));
 });
