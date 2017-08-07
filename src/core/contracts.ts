@@ -1,21 +1,21 @@
 export interface Configuration {
-    pwdStudent:string;
-    pwdTeacher:string;
+    pwdStudent: string;
+    pwdTeacher: string;
 }
 
 export interface University {
-    id:string;
-    name:string;
+    id: string;
+    name: string;
 }
 
 export interface Course {
-    idUniversity:string;
-    name: string;    
+    idUniversity: string;
+    name: string;
 }
 
 export interface Student {
-    id:string;
-    codigo:string;
+    id: string;
+    codigo: string;
     email: string;
 }
 
@@ -24,5 +24,5 @@ export interface Attendance {
 }
 
 export interface Chat {
-    id:string;
+    state: string;
 }

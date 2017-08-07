@@ -1,19 +1,27 @@
 import {
     Chat
 } from '../core/contracts';
+import { Message } from "../bot/Message";
+
+import { dataBase } from "../initDatabase";
 
 export namespace Chats {
 
-    export const getById = (id:string) : Chat|null  => {
+    //declare const dataBase: any;
 
-        if(1 == 1){
-            return {
-                id:"df"
-            } as Chat;
-        }
+    export const saveChatState = (msg: Message, appState: string): Promise<any> => {
+        return dataBase.ref('chats/' + msg.chat.id).set({
+            state: appState
+        });
+    }
 
-        return null;
-
-    };
-
+    export const getChat = (msg: Message): Promise<Chat> => {
+        return dataBase.ref('chats/' + msg.chat.id).once('value')
+            .then((snapshot: any) => {
+                return snapshot.val().state;
+            })
+            .catch((error: any) => {
+                console.log("Chats/getChatState" + error);
+            });
+    }
 }

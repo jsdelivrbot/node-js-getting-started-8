@@ -1,7 +1,4 @@
-import {
-    bot,
-    dataBase
-} from '../initBot';
+import { bot } from '../initBot';
 
 import * as Data from '../data';
 
@@ -11,6 +8,8 @@ import { SendMessageOptions } from "../bot/SendMessageOptions";
 import { Chat } from "../bot/Chat";
 import { Chat as ChatModel } from '../core/contracts';
 import { KeyboardButton } from "../bot/KeyboardButton";
+
+import * as Core from '../core';
 
 import { studentRegistration } from './student-registration';
 
@@ -47,7 +46,7 @@ export namespace index {
         export const sendStartMessage = (msg: Message) => {
             bot.sendMessage(
                 msg.chat.id,
-                `Hola <b>${msg.from.first_name}</b>, escoja su perfil`,
+                `Hola <b>${msg.from.first_name}</b>, escoge tu perfil`,
                 messageOptions
             );
         };
@@ -56,10 +55,14 @@ export namespace index {
     export namespace eventHandlers {
 
         export const listen = () => {
-            
+
             bot.onText(/^\/start$/, (msg: Message, match: any) => {
-                let chat: ChatModel | null = Data.Chats.getById('ad');
-                index.messages.sendStartMessage(msg);
+                //let chat: ChatModel | null = Data.Chats.saveChatState('ad');
+
+                Data.Chats.saveChatState(msg, Core.Constants.ChatStatus.START).then(() => {
+                    index.messages.sendStartMessage(msg);
+                });
+
             });
 
             bot.on('message', (msg: Message) => {

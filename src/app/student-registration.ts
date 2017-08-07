@@ -1,7 +1,4 @@
-import {
-    bot,
-    dataBase
-} from '../initBot';
+import { bot } from '../initBot';
 
 import { Chat } from "../bot/Chat";
 import { Chat as ChatModel } from '../core/contracts';
@@ -60,7 +57,7 @@ export namespace studentRegistration {
     }
 
     export namespace eventHandlers {
-        
+
         export const listen = () => {
 
             bot.on('message', (msg: Message) => {
