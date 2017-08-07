@@ -27,8 +27,7 @@ export namespace index {
         };
 
         const keyboard: Array<Array<KeyboardButton>> = [
-            [EstudianteBtn],
-            [ProfesorBtn]
+            [EstudianteBtn, ProfesorBtn]
         ];
 
         export const start_markup = {
@@ -57,6 +56,7 @@ export namespace index {
     export namespace eventHandlers {
 
         export const listen = () => {
+            
             bot.onText(/^\/start$/, (msg: Message, match: any) => {
                 let chat: ChatModel | null = Data.Chats.getById('ad');
                 index.messages.sendStartMessage(msg);

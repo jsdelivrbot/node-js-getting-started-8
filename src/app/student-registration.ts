@@ -53,7 +53,7 @@ export namespace studentRegistration {
         export const sendStudentMessage = (msg: Message) => {
             bot.sendMessage(
                 msg.chat.id,
-                `Hola <b>${msg.from.first_name}</b>, escoja su perfil`,
+                `¿Que quieres hacer?`,
                 messageOptions
             );
         };
