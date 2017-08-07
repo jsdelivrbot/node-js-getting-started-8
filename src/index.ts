@@ -1,4 +1,3 @@
-/*
 require('./initDatabase');
 require('./initBot');
 
@@ -8,6 +7,3 @@ require('./app/atendee-registration');
 require('./app/manage-homeworks');
 
 require('./jobs/notify-grades-job');
-*/
-
-console.log('disabled');
