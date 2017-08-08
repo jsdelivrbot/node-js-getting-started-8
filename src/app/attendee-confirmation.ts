@@ -9,11 +9,11 @@ import { InlineKeyboardButton } from "../bot/InlineKeyboardButton";
 
 import * as Core from '../core';
 import { University } from "../core/contracts";
-import {
-    attendee_location
-} from './attendee-location';
+import { KeyboardButton } from "../bot/KeyboardButton";
+import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
+import { studentRegistration } from "./student-registration";
 
-export namespace attendee_registration {
+export namespace attendee_confirmation {
 
     export namespace messages {
 
@@ -21,23 +21,13 @@ export namespace attendee_registration {
             parse_mode: 'HTML'
         } as SendMessageOptions;
 
-        export const sendAttendeeMessage = (msg: Message) => {
+        export const sendAttendeeConfirmationMessage = (msg: Message) => {
 
-            Data.Universities.getAllUniversities().then((universitiesList: Array<University>) => {
-
-                if (!universitiesList ||
-                    universitiesList.length == 0) {
-                    return;
-                }
-
-                bot.sendMessage(
-                    msg.chat.id,
-                    `Selecciona la asignatura que deseas registrar.`,
-                    messageOptions
-                );
-
-                attendee_location.messages.sendAttendeeLocationMessage(msg);
-            });
+            bot.sendMessage(
+                msg.chat.id,
+                `He registrado tu asistencia satisfactoriamente.`,
+                messageOptions
+            );
         };
     }
 
@@ -55,4 +45,4 @@ export namespace attendee_registration {
     }
 }
 
-attendee_registration.eventHandlers.listen();
+attendee_confirmation.eventHandlers.listen();

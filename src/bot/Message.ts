@@ -6,6 +6,7 @@
 
 import { User } from "./User";
 import { Chat } from "./Chat";
+import { Location } from "./Location";
 
 export interface Message {
     message_id: number;
@@ -13,4 +14,5 @@ export interface Message {
     date: number;
     chat: Chat;
     text: string;
+    location: Location;
 }
