@@ -4,6 +4,10 @@
  * See {@link https://core.telegram.org/bots/api#inlinekeyboardmarkup}
  */
 
+import {
+    InlineKeyboardButton
+} from './InlineKeyboardButton';
+
 export interface InlineKeyboardMarkup {
-    inline_keyboard: Array<Array<any>>;
+    inline_keyboard: Array<Array<InlineKeyboardButton>>;
 }
