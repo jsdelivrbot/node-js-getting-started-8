@@ -26,7 +26,7 @@ export namespace manageHomeworks {
                 }
 
                 if (msg.text.indexOf(index.reply_markups.ProfesorBtn.text) === 0) {
-                    console.log("Profesor profile manage-homeworks")
+                    console.log("Profesor profile manage-homeworks");
                 }
             });
         }
