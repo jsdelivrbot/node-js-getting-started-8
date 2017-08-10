@@ -9,16 +9,20 @@ export namespace Chats {
 
     //declare const dataBase: any;
 
-    export const saveChatState = (msg: Message, appState: string): Promise<any> => {
+    export const saveState = (msg: Message, appState: string): Promise<any> => {
         return dataBase.ref('chats/' + msg.chat.id).set({
             state: appState
         });
     }
 
+    export const saveCommand = (msg: Message, command: string): Promise<any> => {
+        return dataBase.ref('chats/' + msg.chat.id + '/command').set(command);
+    }
+
     export const getChat = (msg: Message): Promise<Chat> => {
         return dataBase.ref('chats/' + msg.chat.id).once('value')
             .then((snapshot: any) => {
-                return snapshot.val().state;
+                return snapshot.val();
             })
             .catch((error: any) => {
                 console.log("Chats/getChatState" + error);

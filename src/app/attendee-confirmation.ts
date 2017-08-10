@@ -11,7 +11,7 @@ import * as Core from '../core';
 import { University } from "../core/contracts";
 import { KeyboardButton } from "../bot/KeyboardButton";
 import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
-import { studentRegistration } from "./student-registration";
+import { StudentRegistration } from "./student-registration";
 
 export namespace attendee_confirmation {
 

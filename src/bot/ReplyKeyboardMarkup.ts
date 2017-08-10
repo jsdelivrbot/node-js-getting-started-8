@@ -5,9 +5,11 @@
  */
 
 import { KeyboardButton } from "./KeyboardButton";
+import { InlineKeyboardButton } from "./InlineKeyboardButton";
 
 export interface ReplyKeyboardMarkup {
-    keyboard: Array<Array<any>>
-    resize_keyboard: boolean;
-    one_time_keyboard: boolean;
+    keyboard?: Array<Array<KeyboardButton>>;
+    inline_keyboard?:Array<Array<InlineKeyboardButton>>;
+    resize_keyboard?: boolean;
+    one_time_keyboard?: boolean;
 }

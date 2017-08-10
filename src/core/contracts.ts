@@ -26,4 +26,5 @@ export interface Attendance {
 
 export interface Chat {
     state: string;
+    command: string;
 }

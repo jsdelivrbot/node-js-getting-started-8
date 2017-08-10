@@ -11,7 +11,7 @@ import * as Core from '../core';
 import { University } from "../core/contracts";
 import { KeyboardButton } from "../bot/KeyboardButton";
 import { ReplyKeyboardMarkup } from "../bot/ReplyKeyboardMarkup";
-import { studentRegistration } from "./student-registration";
+import { StudentRegistration } from "./student-registration";
 import { attendee_confirmation } from "./attendee-confirmation";
 
 export namespace attendee_location {
@@ -66,7 +66,7 @@ export namespace attendee_location {
                 }
 
                 if (msg.text.indexOf(reply_markups.volverBtn.text) === 0) {
-                    studentRegistration.messages.sendStudentMessage(msg);
+                    //StudentRegistration.messages.sendStudentMessage(msg);
                 }
             });
 

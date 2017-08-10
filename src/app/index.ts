@@ -11,7 +11,7 @@ import { KeyboardButton } from "../bot/KeyboardButton";
 
 import * as Core from '../core';
 
-import { studentRegistration } from './student-registration';
+import { StudentRegistration } from './student-registration';
 
 export namespace index {
 
@@ -56,13 +56,8 @@ export namespace index {
 
         export const listen = () => {
 
-            bot.onText(/^\/start$/, (msg: Message, match: any) => {
-                //let chat: ChatModel | null = Data.Chats.saveChatState('ad');
-
-                Data.Chats.saveChatState(msg, Core.Constants.ChatStatus.START).then(() => {
-                    index.messages.sendStartMessage(msg);
-                });
-
+            bot.onText(/^\/start$/, (msg: Message, match: any) => {                
+                StudentRegistration.Student.sendMessage(msg);
             });
 
             bot.on('message', (msg: Message) => {
@@ -72,7 +67,7 @@ export namespace index {
                 }
 
                 if (msg.text.indexOf(reply_markups.EstudianteBtn.text) === 0) {
-                    studentRegistration.messages.sendStudentMessage(msg);
+                    StudentRegistration.Student.sendMessage(msg);
                 } if (msg.text.indexOf(reply_markups.ProfesorBtn.text) === 0) {
                     console.log("Profesor profile")
                 }
