@@ -56,8 +56,10 @@ export namespace index {
 
         export const listen = () => {
 
-            bot.onText(/^\/start$/, (msg: Message, match: any) => {                
-                StudentRegistration.Student.sendMessage(msg);
+            bot.onText(/^\/start$/, (msg: Message, match: any) => {
+                Data.Chats.saveNewUserConfiguration(msg).then(() => {
+                    StudentRegistration.Student.sendMessage(msg);
+                });
             });
 
             bot.on('message', (msg: Message) => {

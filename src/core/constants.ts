@@ -11,6 +11,9 @@ export namespace Constants {
 
         export namespace Command {
             export namespace StudentRegistration {
+                export namespace Student {
+                    export const MostrarMenu = 'MostrarMenu';
+                }
                 export namespace MisDatos {
                     export const ActualizarMiCodigo = 'ActualizarMiCodigo';
                     export const ActualizarMiEmail = 'ActualizarMiEmail';

@@ -11,6 +11,8 @@ import {
 import { ApiMessage } from "../../api/ApiMessage";
 import { Chat as ChatModel } from "../../core/contracts";
 
+import { Student } from "./student";
+
 export namespace MisDatos {
 
     export enum Options {
@@ -46,11 +48,13 @@ export namespace MisDatos {
                 } as ReplyKeyboardMarkup
             } as SendMessageOptions;
 
-            bot.sendMessage(
-                msg.chat.id,
-                `¿Qué dato deseas actualizar?`,
-                messageOptions
-            );
+            Data.Students.saveStudentName(msg).then(() => {
+                bot.sendMessage(
+                    msg.chat.id,
+                    `¿Qué dato deseas actualizar?`,
+                    messageOptions
+                );
+            });
         });
     };
 
@@ -77,7 +81,9 @@ export namespace MisDatos {
                 }
 
                 if (msg.data.indexOf(Options.Volver) === 0) {
-
+                    Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.Student.MostrarMenu).then(() => {
+                        Student.sendMessage(msg.message);
+                    });
                 }
             });
 
@@ -92,14 +98,14 @@ export namespace MisDatos {
                     if (chat.state == Status.StudentRegistration.MisDatos
                         && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiCodigo) {
                         Data.Students.saveStudentCode(msg, msg.text).then(() => {
-                            sendMessage(msg);
+                            bot.sendMessage(msg.chat.id, "He actualizado tu código satisfactoriamente");
                         });
                     }
 
                     if (chat.state == Status.StudentRegistration.MisDatos
                         && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiEmail) {
                         Data.Students.saveStudentEmail(msg, msg.text).then(() => {
-                            sendMessage(msg);
+                            bot.sendMessage(msg.chat.id, "He actualizado tu correo satisfactoriamente");
                         });
                     }
 
