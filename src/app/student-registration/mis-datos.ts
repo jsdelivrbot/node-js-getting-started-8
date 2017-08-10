@@ -28,14 +28,14 @@ export namespace MisDatos {
                     inline_keyboard: [
                         [
                             {
-                                text: Options.ActualizarMiEmail,
-                                callback_data: Options.ActualizarMiEmail
+                                text: Options.ActualizarMiCodigo,
+                                callback_data: Options.ActualizarMiCodigo
                             }
                         ],
                         [
                             {
-                                text: Options.ActualizarMiCodigo,
-                                callback_data: Options.ActualizarMiCodigo
+                                text: Options.ActualizarMiEmail,
+                                callback_data: Options.ActualizarMiEmail
                             }
                         ],
                         [
