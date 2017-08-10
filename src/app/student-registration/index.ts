@@ -18,12 +18,6 @@ import { MisDatos as MisDatosImpl } from './mis-datos';
 
 export namespace StudentRegistration {
 
-    export namespace Test {
-        export const hello = () => {
-            console.log("hello");
-        }
-    }
-
     export namespace Student {
         export const Options = StudentImpl.Options;
         export const sendMessage = (msg: Message) => {

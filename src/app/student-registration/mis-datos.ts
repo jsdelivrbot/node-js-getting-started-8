@@ -80,6 +80,7 @@ export namespace MisDatos {
                 Data.Chats.getChat(msg).then((chat:ChatModel) => {
                     if(chat.state == Status.StudentRegistration.MisDatos
                     && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiCodigo){
+                        //TODO: Guardar Código estudiante
                         console.log('update código estudiante: ' + msg.text);
                     }                
                 });
