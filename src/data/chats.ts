@@ -9,10 +9,8 @@ export namespace Chats {
 
     //declare const dataBase: any;
 
-    export const saveState = (msg: Message, appState: string): Promise<any> => {
-        return dataBase.ref('chats/' + msg.chat.id).set({
-            state: appState
-        });
+    export const saveState = (msg: Message, state: string): Promise<any> => {
+        return dataBase.ref('chats/' + msg.chat.id + '/state').set(state);
     }
 
     export const saveCommand = (msg: Message, command: string): Promise<any> => {

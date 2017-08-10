@@ -15,7 +15,7 @@ export namespace MisDatos {
 
     export enum Options {
         ActualizarMiCodigo = '🗝 Actualizar mi código',
-        ActualizarMiEmail = '📨 Actualizar mi email',
+        ActualizarMiEmail = '📨 Actualizar mi correo',
         Volver = 'Volver'
     }
 
@@ -69,6 +69,16 @@ export namespace MisDatos {
                         bot.sendMessage(msg.message.chat.id, 'Ingresa tu código');
                     });
                 }
+
+                if (msg.data.indexOf(Options.ActualizarMiEmail) === 0) {
+                    Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.MisDatos.ActualizarMiEmail).then(() => {
+                        bot.sendMessage(msg.message.chat.id, 'Ingresa tu correo');
+                    });
+                }
+
+                if (msg.data.indexOf(Options.Volver) === 0) {
+
+                }
             });
 
             bot.on('message', (msg: Message) => {
@@ -77,12 +87,22 @@ export namespace MisDatos {
                     return;
                 }
 
-                Data.Chats.getChat(msg).then((chat:ChatModel) => {
-                    if(chat.state == Status.StudentRegistration.MisDatos
-                    && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiCodigo){
-                        //TODO: Guardar Código estudiante
-                        console.log('update código estudiante: ' + msg.text);
-                    }                
+                Data.Chats.getChat(msg).then((chat: ChatModel) => {
+
+                    if (chat.state == Status.StudentRegistration.MisDatos
+                        && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiCodigo) {
+                        Data.Students.saveStudentCode(msg, msg.text).then(() => {
+                            sendMessage(msg);
+                        });
+                    }
+
+                    if (chat.state == Status.StudentRegistration.MisDatos
+                        && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiEmail) {
+                        Data.Students.saveStudentEmail(msg, msg.text).then(() => {
+                            sendMessage(msg);
+                        });
+                    }
+
                 });
             });
         }

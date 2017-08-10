@@ -18,6 +18,7 @@ export interface Student {
     id: string;
     codigo: string;
     email: string;
+    nombre: string;
 }
 
 export interface Attendance {
