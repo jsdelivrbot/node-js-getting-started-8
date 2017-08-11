@@ -20,11 +20,15 @@ export namespace Chats {
     }
 
     export const saveNewUserConfiguration = (msg: Message): Promise<any> => {
-        return dataBase.ref('chats/' + msg.chat.id).set({
+        
+        let newChat:any = new Object();
+        newChat[msg.chat.id] = {
             state: "",
             command: "",
             username: msg.chat.username
-        });
+        };
+
+        return dataBase.ref('profejosebot-94c5e').child('chats').setValue([newChat]);
     }
 
     export const getChat = (msg: Message): Promise<Chat> => {

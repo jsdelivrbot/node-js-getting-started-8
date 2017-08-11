@@ -28,14 +28,14 @@ export namespace Student {
                     keyboard: [
                         //[{ text: Options.Asistencia }],
                         [{ text: Options.MisDatos }],
-                        [{ text: Options.Volver }]
+                        //[{ text: Options.Volver }]
                     ],
                 } as ReplyKeyboardMarkup
             } as SendMessageOptions;
 
             bot.sendMessage(
                 msg.chat.id,
-                `¿Que quieres hacer?`,
+                `Hola <b>${msg.from.first_name}</b>, soy el bot asistente del profe Jose, por favor presiona en <b>${Options.MisDatos}</b> y sigue las instrucciones`,
                 messageOptions
             );
         });
