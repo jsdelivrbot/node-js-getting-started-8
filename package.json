@@ -7,7 +7,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "mocha -r ts-node/register src/test/index.ts",
     "build": "tsc || node dist/index.js",
     "dev": "node dist/index.js"
   },
@@ -21,11 +21,17 @@
     "typescript": "^2.4.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.3",
     "@types/firebase": "^2.4.31",
+    "@types/mocha": "^2.2.41",
     "@types/node": "^8.0.19",
     "@types/node-telegram-bot-api": "^0.27.0",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
     "request": "^2.81.0",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "ts-node": "^3.3.0",
+    "typings": "^2.1.1"
   },
   "repository": {
     "type": "git",
