@@ -25,7 +25,7 @@ export namespace Chats {
             command: "",
             username: msg.chat.username != undefined ? msg.chat.username : "",
         });
-    }
+    }    
 
     export const getChat = (msg: Message): Promise<Chat> => {
         return dataBase.ref('chats/' + msg.chat.id).once('value')

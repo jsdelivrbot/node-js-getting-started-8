@@ -9,7 +9,7 @@ import {
     Commands
 } from '../../core';
 import { ApiMessage } from "../../api/ApiMessage";
-import { Chat as ChatModel } from "../../core/contracts";
+import { Chat as ChatModel, Student as StudentModel } from "../../core/contracts";
 
 import { Student } from "./student";
 
@@ -17,7 +17,7 @@ export namespace MisDatos {
 
     export enum Options {
         ActualizarMiCodigo = '🗝 Actualizar mi código',
-        ActualizarMiEmail = '📨 Actualizar mi correo',
+        ActualizarMiEmail = '📨 Actualizar mi email',
         Volver = 'Volver'
     }
 
@@ -69,21 +69,13 @@ export namespace MisDatos {
                 }
 
                 if (msg.data.indexOf(Options.ActualizarMiCodigo) === 0) {
-                    Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.MisDatos.ActualizarMiCodigo).then(() => {
-                        bot.sendMessage(msg.message.chat.id, 'Ingresa tu código');
-                    });
+                    onActualizarMiCodigo(msg);
                 }
-
-                if (msg.data.indexOf(Options.ActualizarMiEmail) === 0) {
-                    Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.MisDatos.ActualizarMiEmail).then(() => {
-                        bot.sendMessage(msg.message.chat.id, 'Ingresa tu correo');
-                    });
+                else if (msg.data.indexOf(Options.ActualizarMiEmail) === 0) {
+                    onActualizarMiEmail(msg);
                 }
-
-                if (msg.data.indexOf(Options.Volver) === 0) {
-                    Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.Student.MostrarMenu).then(() => {
-                        Student.sendMessage(msg.message);
-                    });
+                else if (msg.data.indexOf(Options.Volver) === 0) {
+                    onVolver(msg);
                 }
             });
 
@@ -94,22 +86,54 @@ export namespace MisDatos {
                 }
 
                 Data.Chats.getChat(msg).then((chat: ChatModel) => {
-
                     if (chat.state == Status.StudentRegistration.MisDatos
                         && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiCodigo) {
-                        Data.Students.saveStudentCode(msg, msg.text).then(() => {
-                            bot.sendMessage(msg.chat.id, "He actualizado tu código satisfactoriamente");
-                        });
+                        actualizarMiCodigo(msg);
                     }
-
-                    if (chat.state == Status.StudentRegistration.MisDatos
+                    else if (chat.state == Status.StudentRegistration.MisDatos
                         && chat.command == Commands.StudentRegistration.MisDatos.ActualizarMiEmail) {
-                        Data.Students.saveStudentEmail(msg, msg.text).then(() => {
-                            bot.sendMessage(msg.chat.id, "He actualizado tu correo satisfactoriamente");
-                        });
+                        actualizarMiEmail(msg);
                     }
-
                 });
+            });
+        }
+
+        const onActualizarMiCodigo = (msg: ApiMessage) => {
+            Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.MisDatos.ActualizarMiCodigo).then(() => {
+                bot.sendMessage(msg.message.chat.id, 'Ingresa tu código');
+            });
+        }
+
+        const onActualizarMiEmail = (msg: ApiMessage) => {
+            Data.Chats.saveCommand(msg.message, Commands.StudentRegistration.MisDatos.ActualizarMiEmail).then(() => {
+                bot.sendMessage(msg.message.chat.id, 'Ingresa tu email');
+            });
+        }
+
+        const onVolver = (msg: ApiMessage) => {
+            Data.Students.getStudentByChatId(msg.message).then(
+                (student: StudentModel) => {
+                    Student.sendMessage({
+                        chat: {
+                            id: msg.message.chat.id
+                        },
+                        from: {
+                            first_name: student.nombre
+                        }
+                    } as Message);
+                }
+            );
+        }
+
+        const actualizarMiCodigo = (msg: Message) => {
+            Data.Students.saveStudentCode(msg, msg.text).then(() => {
+                bot.sendMessage(msg.chat.id, "Has actualizado tu código satisfactoriamente");
+            });
+        }
+        
+        const actualizarMiEmail = (msg: Message) => {
+            Data.Students.saveStudentEmail(msg, msg.text).then(() => {
+                bot.sendMessage(msg.chat.id, "Has actualizado tu email satisfactoriamente");
             });
         }
     }

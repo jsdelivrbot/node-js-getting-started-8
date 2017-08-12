@@ -14,7 +14,7 @@ export namespace Student {
 
     export enum Options {
         Asistencia = '📝 Ingresar mi asistencia',
-        MisDatos = '⚙️ Mis Datos',
+        MisDatos = '⚙️ Actualizar Mis Datos',
         Volver = 'Volver'
     }
 
@@ -35,7 +35,7 @@ export namespace Student {
 
             bot.sendMessage(
                 msg.chat.id,
-                `Hola <b>${msg.from.first_name}</b>, soy el bot asistente del profe Jose, por favor presiona en <b>${Options.MisDatos}</b> y sigue las instrucciones`,
+                `Hola <b>${msg.from.first_name}</b>, soy el bot asistente del profe Jose, por favor selecciona alguna de las opciones y sigue las instrucciones`,
                 messageOptions
             );
         });
